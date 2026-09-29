@@ -1,0 +1,27 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: employe-microservices
+  datasource:
+    url: 'jdbc:h2:mem:empdb' #ici le nom de ma database
+  h2:
+    console:
+      enabled: true #pour laffichage de console dans la navigatuer
+  jpa:
+    show-sql: true #pour affichage des comande sql au niveua de console hibernate
+    hibernate:
+      ddl-auto: update  #pour mettre a jour la base de donne�s avec les modifications des attribut  de la structure de donnes de mes classes entity
+  cloud:
+    config:
+      enabled: false # au debut false pour ne pas aller chercheer la configuration
+    discovery:
+      enabled: false
+management: #concerne l'actuator ,
+  #c'est un module qui permet d'avoir des informations
+  #sur la sante de notre projet ? est ce qu'il up ou down
+  endpoints:
+    web:
+      exposure:
+        include: health #activer tous les point disponibles avec actuator
+
