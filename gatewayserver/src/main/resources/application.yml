@@ -1,0 +1,45 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: gatewayserver
+  cloud:
+    config:
+      enabled: false
+    discovery:
+      enabled: true
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id : r1
+              uri : lb://GRADE
+              predicates:
+                - Path=/api/Grade/**
+            - id: r2
+              uri: lb://EMPLOYEE
+              predicates:
+                - Path=/api/employes/**
+          discovery:
+            locator:
+              enabled: false
+              lower-case-service-id: true
+  eureka:
+    client:
+      service-url:
+        defaultZone: 'http://localhost:8761/eureka/'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#pour activer le enpoint 8888/actuator/gateway/routes
+  endpoint:
+    gateway:
+      access: unrestricted
+eureka:
+  instance:
+    prefer-ip-address: true
+    # on met ca a true pour que le gateway n'utilise
+    #pas le nom de la machine .mais il v autiliser l addresse ip
