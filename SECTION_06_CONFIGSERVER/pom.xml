@@ -21,6 +21,7 @@
         <module>eurekaserver</module>
         <module>gatewayserver</module>
         <module>grade-microservices</module>
+        <module>configserver</module>
 
         <!-- Nouveaux projets de la Section 06 (décommentez-les au fur et à mesure de leur création) -->
         <!-- <module>config-repo</module> -->

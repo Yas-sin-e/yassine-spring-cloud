@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: configserver
+  profiles:
+    #active: native
+    #je lire les fichiers yaml a partire de ma classpath
+    active: git
+  cloud:
+    config:
+      server:
+#lire les fichiers de configuration localement
+        #native:
+         # search-locations: "classpath:/config"
+          #search-locations: file:///C:/Users/yassi/eclipse-workspace/yassine-spring-cloud/SECTION_06_CONFIGSERVER/config_repo
+        git:
+          uri: https://github.com/Yas-sin-e/config-repo.git
+          default-label: main
+          clone-on-start: true #a chaque fois le server demare danc il cloner le repo githbb en locale
+
+server:
+  port: 9999
+
+#Extraction de l'application (employee) : Le premier paramètre de l'URL correspond au nom du microservice (spring.application.name). Le serveur sait maintenant qu'il doit chercher les fichiers commençant par employee.
+#
+#Extraction du profil (prod) : Le deuxième paramètre correspond au profil actif (spring.profiles.active).
+#
+#Recherche des fichiers : Le Config Server va chercher dans le dossier spécifié (classpath:/config) la combinaison des fichiers suivants :
+#
+#  employee.yml (configuration de base)
+#
+#  employee-prod.yml (configuration spécifique au profil prod)
