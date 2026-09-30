@@ -4,20 +4,8 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/employe-microservices/pom.xml" />
-        <option value="$PROJECT_DIR$/grade/pom.xml" />
-        <option value="$PROJECT_DIR$/grade-microservices/pom.xml" />
-        <option value="$PROJECT_DIR$/eurekaserver/pom.xml" />
-        <option value="$PROJECT_DIR$/gatewayserver/pom.xml" />
-        <option value="$PROJECT_DIR$/SECTION_06_CONFIGSERVER/pom.xml" />
-        <option value="$PROJECT_DIR$/SECTION_02_CREA_MS/pom.xml" />
-        <option value="$PROJECT_DIR$/SECTION_03_COMM_MS/pom.xml" />
-        <option value="$PROJECT_DIR$/SECTION_04_EUREKA/pom.xml" />
-        <option value="$PROJECT_DIR$/SECTION_05_GATEWAY/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_24" default="true" project-jdk-name="24" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

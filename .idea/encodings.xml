@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/SECTION_02_CREA_MS/employe-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_02_CREA_MS/grade-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_02_CREA_MS/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_02_CREA_MS/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_03_COMM_MS/employe-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_03_COMM_MS/grade-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_03_COMM_MS/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_03_COMM_MS/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_04_EUREKA/employe-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_04_EUREKA/eurekaserver/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_04_EUREKA/grade-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_04_EUREKA/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_04_EUREKA/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_05_GATEWAY/employe-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_05_GATEWAY/eurekaserver/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_05_GATEWAY/gatewayserver/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_05_GATEWAY/grade-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_05_GATEWAY/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_05_GATEWAY/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_06_CONFIGSERVER/employe-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_06_CONFIGSERVER/eurekaserver/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_06_CONFIGSERVER/gatewayserver/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_06_CONFIGSERVER/grade-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_06_CONFIGSERVER/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SECTION_06_CONFIGSERVER/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/employe-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/employe-microservices/src/main/resources/application.yml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/eurekaserver/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/gatewayserver/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/grade-microservices/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/grade-microservices/src/main/resources/application.yml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
