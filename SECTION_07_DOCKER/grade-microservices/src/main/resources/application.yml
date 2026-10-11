@@ -21,9 +21,9 @@ spring:
       ddl-auto: update
   cloud:
     config:
-      enabled: true
+      enabled: false
     discovery:
-      enabled: true
+      enabled: false
 eureka:
   instance:
     prefer-ip-address: true
@@ -38,5 +38,10 @@ management:
       exposure:
         include: '*'
 
+build :
+  version: 1.0
+author: #on ajouter ca parce que j'ai dans le config prefix = "author"
+  name: "yassine aounallah"
+  email: "yassineaounallah22@gmail.com"
 
 
