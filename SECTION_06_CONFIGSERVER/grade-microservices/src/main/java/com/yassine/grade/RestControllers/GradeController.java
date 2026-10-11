@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/Grade")
-@RefreshScope // <--- Indispensable pour recharger les valeurs dynamiquement
 public class GradeController {
 
     private GradeService gradeService;
