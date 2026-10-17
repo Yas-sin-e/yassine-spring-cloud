@@ -1,0 +1,71 @@
+docker pull mysql :
+Cette commande télécharge l'image officielle de MySQL depuis le registre Docker Hub sur votre machine locale
+Elle permet de récupérer le modèle de base de données sans avoir à l'installer directement
+sur le système d'exploitation de votre ordinateur.
+
+
+docker network create my-net :
+ Cette commande crée un réseau virtuel privé et isolé dans Docker.
+ Son rôle est de permettre aux différents conteneurs
+ (par exemple, le conteneur MySQL et le conteneur de votre microservice)
+de communiquer entre eux en toute sécurité sur un même espace réseau virtuel.
+
+docker network ls : Cette commande liste tous les réseaux Docker existants sur votre machine,
+ce qui permet de vérifier visuellement que le réseau my-net a bien été créé avec succès
+
+
+docker run --network my-net -p 3306:3306 --name mysqldb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test mysql:latest
+
+C'est la commande principale pour lancer le conteneur MySQL.
+--network my-net :connecte ce conteneur au réseau virtuel que l'on vient de créer
+Branche ce conteneur mysqldb directement sur ce canal de communication privé".
+
+-p 3306:3306 crée un pont entre le port 3306 de votre ordinateur physique et le port 3306 du conteneur MySQL,
+permettant ainsi d'accéder à la base de données depuis des logiciels externes comme Sqlectron.
+
+Sqlectron :n'est pas une base de données.   C'est un outil logiciel (un client SQL graphique)
+Un tableau de bord visuel : Tout comme tu utilises un navigateur web (comme Chrome) pour visiter des sites internet,
+ Sqlectron est un logiciel qui te sert à « visiter » et explorer ta base de données MySQL.
+
+
+1. C'est quoi le nom du conteneur ?
+Le nom du conteneur est : mysqldb
+
+Il est défini grâce à l'option --name mysqldb. C'est le nom personnalisé que tu donnes à ta "boîte" pour pouvoir la retrouver facilement ensuite.
+
+
+
+-e MYSQL_ROOT_PASSWORD=root et -e MYSQL_DATABASE=test sont des variables d'environnement (-e) qui configurent
+automatiquement le mot de passe du compte root à root et créent directement une base de données vide
+ nommée test au premier démarrage.
+
+ mysql:latest indique l'image à utiliser, à savoir la dernière version de MySQL
+
+
+ Bash
+ docker run [OPTIONS de configuration]  [NOM_DE_L_IMAGE]
+ La zone des options (au milieu) : Tout ce qui commence par des tirets (--network my-net, -p 3306:3306, --name mysqldb, -e ...)
+  ce sont des options de configuration pour dire à Docker comment il doit lancer le conteneur.
+   Tu peux les mettre dans l'ordre que tu veux, mais elles doivent toujours être placées avant l'image.
+
+ L'image (tout à la fin) : Le nom de l'image (mysql:latest) se place obligatoirement en dernier.
+
+
+ Automatiser avec docker-compose.yml
+ Lancer manuellement chaque conteneur et chaque commande un par un peut vite devenir lourd.
+ Docker Compose permet
+ de centraliser toute l'infrastructure (la base de données et le microservice) dans un seul fichier de configuration textuel
+Le service mysqldb déclare le conteneur MySQL, ses variables d'environnement et un healthcheck
+Le healthcheck sert à tester régulièrement si MySQL a fini de démarrer et s'il est réellement prêt à accepter des requêtes.
+ici on veux mettre les commandes necessaires pour cree danc les containers de plusieur microservices
+
+Le service du microservice (par exemple grade-ms) indique où trouver le code pour construire l'image,
+expose le port 8080, et transmet les variables d'environnement pour la connexion à la base de données
+
+L'option depends_on associée à condition: service_healthy est fondamentale :
+elle indique à Docker de patienter sagement que le conteneur MySQL soit totalement opérationnel avant de lancer
+ le microservice, évitant ainsi les erreurs de plantage au démarrage
+
+ docker compose up :
+ Cette commande unique lit le fichier docker-compose.yml, crée automatiquement le réseau,
+ lance la base de données, attend qu'elle soit prête, puis compile et lance votre microservice connecté.
