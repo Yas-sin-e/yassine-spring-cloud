@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+  profiles:
+    active: "default"
+  config:
+    import: optional:configserver:${CONFIG_SERVICE_URL:http://localhost:9999}
+
+    #optional: si le serveur est n'esp demarer  contenu n'affiche pas d'erreure
+
+  application:
+    name: grade
+  datasource:
+   url: 'jdbc:h2:mem:gradedb'
+
+  h2:
+    console:
+      enabled: true
+      #     url: jdbc:mysql://mysqldb:3306/test?useSSL=false&serverTimezone=UTC
+      #     username: root
+      #     password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  cloud:
+    config:
+      enabled: true
+    discovery:
+      enabled: true
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    refresh:
+      enable: false
+    service-url:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761/eureka}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+build :
+  version: 1.0
+author: #on ajouter ca parce que j'ai dans le config prefix = "author"
+  name: "yassine aounallah"
+  email: "yassineaounallah22@gmail.com"
+
+
