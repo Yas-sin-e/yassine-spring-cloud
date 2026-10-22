@@ -69,3 +69,6 @@ elle indique à Docker de patienter sagement que le conteneur MySQL soit totalem
  docker compose up :
  Cette commande unique lit le fichier docker-compose.yml, crée automatiquement le réseau,
  lance la base de données, attend qu'elle soit prête, puis compile et lance votre microservice connecté.
+
+
+ hookdeck listen 9999 Source --cli-path /monitor

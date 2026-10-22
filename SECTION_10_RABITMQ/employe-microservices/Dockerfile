@@ -1,7 +1,4 @@
 
-
-
-
 FROM eclipse-temurin:21-jdk
 
 LABEL "org.opencontainers.image.authors"="yassine.com"
