@@ -71,4 +71,10 @@ elle indique à Docker de patienter sagement que le conteneur MySQL soit totalem
  lance la base de données, attend qu'elle soit prête, puis compile et lance votre microservice connecté.
 
 
+❯ netstat -ano | findstr ":8080"
+  TCP    [::1]:8080             [::]:0                 CLOSED          2296
+
+❯ Get-NetTCPConnection -LocalPort 8080
+
+
  hookdeck listen 9999 Source --cli-path /monitor
