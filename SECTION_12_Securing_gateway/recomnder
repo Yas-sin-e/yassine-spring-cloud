@@ -1,0 +1,46 @@
+Nous avons :
+- 6 échecs.
+- 4 succès.
+Le taux d'échec est :
+Failure Rate= 6 /10 *100=60%
+
+
+Paramètre 2 : failureRateThreshold: 50
+
+Cela signifie que le seuil d'échec est de 50 %.
+
+Dans notre exemple :
+\[
+60\% > 50\%
+\]
+
+Le seuil est dépassé.
+
+Le Circuit Breaker peut donc passer de CLOSED à OPEN.
+
+5 Visualiser le fonctionnement avec notre configuration
+ CLOSED
+ Appels normaux
+
+ 10 appels observés, seuil d'échec surveillé
+
+ Taux d'échec supérieur ou égal au seuil
+
+ OPEN
+ Appels bloqués
+
+ Attente de 10 secondes
+
+ Après le délai d'attente
+
+ HALF_OPEN
+ 2 appels de test autorisés
+
+ Évaluation de la récupération du service
+
+ Succès → CLOSED
+
+ Échec → OPEN
+
+ http://localhost:8081/actuator/circuitbreakers
+ pour verifer l'etat de circuit Breakers
