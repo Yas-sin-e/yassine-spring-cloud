@@ -1,0 +1,137 @@
+services:
+  rabbit:
+    image: rabbitmq:4-management
+    container_name: rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+  eurekaserver:
+    build: ./eurekaserver
+    container_name: eurekaserver
+#    ports:
+#      - "8761:8761"
+    healthcheck:
+      test: "curl --fail --silent localhost:8761/actuator/health | grep UP || exit 1"
+      interval: 10s
+
+
+  configserver:
+    build: ./configserver
+    container_name: configserver
+#    ports:
+#      - "9999:9999"
+    healthcheck:
+      test: "curl --fail --silent localhost:9999/actuator/health | grep UP || exit 1"
+      interval: 10s
+#    depends_on:
+#      rabbitmq:
+#        condition: service_healthy
+#interval on lance le test avec un intervalle de 10 secondes
+  #si ne reusit pas il attend 10 send et fait un autre halthcheck
+
+  grade-ms:
+    build: ./grade-microservices
+    container_name: grade-ms
+#    ports:
+#      - '8080:8080'
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eurekaserver:8761/eureka
+      - CONFIG_SERVICE_URL=http://configserver:9999
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1"
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+  postgres:
+    image: postgres:16
+    container_name: kc-postgres-dev
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    volumes:
+      - kc_pg_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.3.4
+    container_name: keycloak
+    command: start-dev
+    environment:
+      -  KC_DB=postgres
+      -  KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak
+      -  KC_DB_USERNAME=keycloak
+      -  KC_DB_PASSWORD=keycloak
+      -  KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      -  KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    ports:
+      - "8090:8080"
+    depends_on:
+      - postgres
+
+
+  gatewayserver:
+    build: ./gatewayserver
+    container_name: gatewayserver
+    ports:
+      - '8888:8888'
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eurekaserver:8761/eureka
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/realms/master/protocol/openid-connect/certs
+    healthcheck:
+      test: "curl --fail --silent localhost:8888/actuator/health | grep UP || exit 1"
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+  employee-ms:
+    build: ./employe-microservices
+    container_name:  employee-ms
+#    ports:
+#      - '8081:8081'
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eurekaserver:8761/eureka
+      - CONFIG_SERVICE_URL=http://configserver:9999
+      - SPRING_RABBITMQ_HOST=rabbit
+    healthcheck:
+      test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+      grade-ms:
+        condition: service_healthy
+  message:
+    build: ./mesage
+    container_name: message-ms
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+volumes:
+      kc_pg_data:
+#  grade-ms2:
+#    build: ./grade-microservices
+#    container_name: grade-ms2
+##    ports:
+##      - '8084:8080'
+#    environment:
+#      - DISCOVERY_SERVICE_URL=http://eurekaserver:8761/eureka
+#      - CONFIG_SERVICE_URL=http://configserver:9999
+#    healthcheck:
+#      test: "curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1"
+#    depends_on:
+#      eurekaserver:
+#        condition: service_healthy
+#      configserver:
+#        condition: service_healthy
+

@@ -1,0 +1,21 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: message
+  cloud:
+    function:
+      definition: email|sms
+    stream:
+      bindings:
+        emailsms-in-0: # le fonctin avec in pour recoevoir un input et indexe commence les elements par 0
+          destination: send-communication #le nom de exchnage
+          group: ${spring.application.name} # le nom de quee pour lb lorsque plusieurs instances
+        emailsms-out-0:
+          destination: communication-sent
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    connection-timeout: 10s
